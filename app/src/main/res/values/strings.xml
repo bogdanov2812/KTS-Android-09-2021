@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Strava</string>
+    <string name="app_name">Client for Strava</string>
+    <string name="main_description">Train hard with Strava!</string>
+    <string name="button">Push me!</string>
 </resources>

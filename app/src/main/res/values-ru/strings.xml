@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Клиент для Strava</string>
+    <string name="main_description">Усиленно тренируйся вместе с Strava!</string>
+    <string name="button">Нажми меня!</string>
+</resources>
