@@ -3,47 +3,24 @@ package com.bogdanov.strava
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
+    private val mutableState = savedStateHandle.getLiveData("loginStatus", LoginParcelable(email = "", password = "", false))
 
-    val email: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
+    val state : LiveData<LoginParcelable> = mutableState
 
-    val password: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val login: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
-
-    fun saveEmail(emailText: String){
-        email.value = emailText
-    }
-
-    fun savePassword(passwordText: String){
-        password.value = passwordText
+    fun updateStatus(email: String, password: String) {
+        val buttonEnableStatus =
+            validEmail(email) && validPassword(password)
+        mutableState.value = LoginParcelable(email, password, buttonEnableStatus)
     }
 
 
-    fun editEmail(newText: String): Boolean{
-        return newText != email.value
-    }
+    private fun validPassword(password: String): Boolean = password.length >= 8 && password.isNotEmpty()
 
-    fun editPassword(newText: String): Boolean{
-        return newText != password.value
-    }
-
-    fun validPassword(password: String): Boolean = password.length >= 8 && password.isNotEmpty()
-
-    fun validEmail(email:String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.isNotEmpty()
-
-
-    fun loginVisible(email: String, password: String){
-        login.value = validEmail(email) && validPassword(password)
-    }
+    private fun validEmail(email:String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.isNotEmpty()
 
 }

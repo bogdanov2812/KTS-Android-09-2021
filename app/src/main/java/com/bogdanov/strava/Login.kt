@@ -1,5 +1,6 @@
 package com.bogdanov.strava
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import timber.log.Timber
 
 
 class LoginPage : Fragment(R.layout.fragment_login) {
@@ -33,22 +35,9 @@ class LoginPage : Fragment(R.layout.fragment_login) {
 
         val passwordTextView = view.findViewById<TextInputLayout>(R.id.password)
 
-        viewModel.email.observe(viewLifecycleOwner,{ email ->
-            if (viewModel.editEmail(emailTextView.editText?.text.toString()))
-                emailTextView.editText?.setText(email)
-        })
-
-        viewModel.password.observe(viewLifecycleOwner,{ password ->
-            if (viewModel.editPassword(passwordTextView.editText?.text.toString()))
-                passwordTextView.editText?.setText(password)
-        })
-
-        viewModel.loginVisible(emailTextView.editText?.text.toString(),passwordTextView.editText?.text.toString())
-
 
         passwordTextView.editText?.doOnTextChanged{ passwordText, _, _, _ ->
-            viewModel.savePassword(passwordText.toString())
-            viewModel.loginVisible(emailTextView.editText?.text.toString(),passwordText.toString())
+            viewModel.updateStatus(emailTextView.editText?.text.toString(),passwordText.toString())
 
             if (passwordText!!.length < 8)
                 passwordTextView.error = getString(R.string.passwordTextView_error)
@@ -59,18 +48,27 @@ class LoginPage : Fragment(R.layout.fragment_login) {
 
 
         emailTextView.editText?.doOnTextChanged { emailText, _, _, _ ->
-            viewModel.saveEmail(emailText.toString())
-            viewModel.loginVisible(emailText.toString(),passwordTextView.editText?.text.toString())
+            viewModel.updateStatus(emailText.toString(),passwordTextView.editText?.text.toString())
 
         }
 
-        viewModel.login.observe(viewLifecycleOwner,{
-            loginButton.isEnabled = it
-        })
+        viewModel.state.observe(viewLifecycleOwner, { state ->
 
+            if (emailTextView.editText?.text.toString()!=state.email){
+                emailTextView.editText?.setText(state.email)
+            }
+
+            if (passwordTextView.editText?.text.toString()!=state.password){
+                passwordTextView.editText?.setText(state.password)
+            }
+
+            loginButton.isEnabled = state.buttonEnableStatus
+
+        })
 
         loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginPage_to_mainPage)
         }
     }
+
 }
