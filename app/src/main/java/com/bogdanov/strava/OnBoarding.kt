@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 
-
 class OnBoarding : Fragment(R.layout.fragment_on_boarding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -18,7 +17,4 @@ class OnBoarding : Fragment(R.layout.fragment_on_boarding) {
             findNavController().navigate(R.id.action_onBoardingPage_to_loginPage)
         }
     }
-
-
-
 }
