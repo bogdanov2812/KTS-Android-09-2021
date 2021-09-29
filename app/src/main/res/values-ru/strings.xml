@@ -3,4 +3,9 @@
     <string name="app_name">Клиент для Strava</string>
     <string name="main_description">Усиленно тренируйся вместе с Strava!</string>
     <string name="button">Нажми меня!</string>
+    <string name="email">Эл. почта</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="passwordTextView_error">Пароль должен быть не короче 8 символов</string>
+    <string name="welcome">Добро пожаловать на главную страницу!</string>
 </resources>

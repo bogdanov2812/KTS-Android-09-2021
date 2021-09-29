@@ -2,4 +2,9 @@
     <string name="app_name">Client for Strava</string>
     <string name="main_description">Train hard with Strava!</string>
     <string name="button">Push me!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="passwordTextView_error">The password must be at least 8 characters long</string>
+    <string name="welcome">Welcome to main page!</string>
 </resources>
