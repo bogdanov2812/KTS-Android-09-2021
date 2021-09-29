@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 
-class OnBoarding : Fragment(R.layout.fragment_on_boarding) {
+class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

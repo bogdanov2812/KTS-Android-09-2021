@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onBoardingPage"
-        android:name="com.bogdanov.strava.OnBoarding"
+        android:name="com.bogdanov.strava.OnBoardingFragment"
         android:label="OnBoarding" >
         <action
             android:id="@+id/action_onBoardingPage_to_loginPage"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginPage"
-        android:name="com.bogdanov.strava.LoginPage"
+        android:name="com.bogdanov.strava.LoginPageFragment"
         android:label="LoginPage" >
         <action
             android:id="@+id/action_loginPage_to_mainPage"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainPage"
-        android:name="com.bogdanov.strava.Main"
+        android:name="com.bogdanov.strava.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 </navigation>

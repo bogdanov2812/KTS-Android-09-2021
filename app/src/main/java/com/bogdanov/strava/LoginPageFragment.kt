@@ -24,9 +24,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import timber.log.Timber
 
-class LoginPage : Fragment(R.layout.fragment_login) {
+class LoginPageFragment : Fragment(R.layout.fragment_login) {
 
-    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel : LoginPageViewModel by viewModels()
     private val binding : FragmentLoginBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

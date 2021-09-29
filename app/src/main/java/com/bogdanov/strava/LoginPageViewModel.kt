@@ -3,7 +3,7 @@ package com.bogdanov.strava
 import android.util.Patterns
 import androidx.lifecycle.*
 
-class LoginViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+class LoginPageViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val mutableState = savedStateHandle.getLiveData("loginStatus", LoginParcelable(email = "", password = "", false))
     val state : LiveData<LoginParcelable> = mutableState
