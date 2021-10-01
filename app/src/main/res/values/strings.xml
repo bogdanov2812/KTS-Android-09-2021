@@ -7,4 +7,7 @@
     <string name="login">Login</string>
     <string name="passwordTextView_error">The password must be at least 8 characters long</string>
     <string name="welcome">Welcome to main page!</string>
+    <string name="skip_button">Skip</string>
+    <string name="button_next">Next</string>
+    <string name="button_finish">Finish</string>
 </resources>
