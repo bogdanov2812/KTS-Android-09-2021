@@ -1,7 +1,8 @@
-package com.bogdanov.strava
+package com.bogdanov.strava.login
 
 import android.util.Patterns
 import androidx.lifecycle.*
+import com.bogdanov.strava.models.LoginParcelable
 
 class LoginPageViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 

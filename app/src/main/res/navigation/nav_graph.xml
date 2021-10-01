@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginPage"
-        android:name="com.bogdanov.strava.LoginPageFragment"
+        android:name="com.bogdanov.strava.login.LoginPageFragment"
         android:label="LoginPage" >
         <action
             android:id="@+id/action_loginPage_to_mainPage"
