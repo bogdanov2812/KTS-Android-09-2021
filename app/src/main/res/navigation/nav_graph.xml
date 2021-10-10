@@ -3,21 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onBoardingPage">
+    app:startDestination="@id/viewPagerFragment">
 
     <fragment
-        android:id="@+id/onBoardingPage"
-        android:name="com.bogdanov.strava.OnBoardingFragment"
-        android:label="OnBoarding" >
-        <action
-            android:id="@+id/action_onBoardingPage_to_loginPage"
-            app:destination="@id/loginPage"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/loginPage"
-        android:name="com.bogdanov.strava.LoginPageFragment"
+        android:name="com.bogdanov.strava.login.LoginPageFragment"
         android:label="LoginPage" >
         <action
             android:id="@+id/action_loginPage_to_mainPage"
@@ -30,4 +20,15 @@
         android:name="com.bogdanov.strava.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.bogdanov.strava.onboarding.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_loginPage"
+            app:destination="@id/loginPage"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

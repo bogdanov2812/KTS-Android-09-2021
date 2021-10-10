@@ -1,4 +1,4 @@
-package com.bogdanov.strava
+package com.bogdanov.strava.models
 
 import android.os.Message
 import android.os.Parcelable
