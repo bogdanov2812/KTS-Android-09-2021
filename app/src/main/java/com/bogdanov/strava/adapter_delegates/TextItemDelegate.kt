@@ -20,9 +20,7 @@ class TextItemDelegate (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_text, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(ItemTextBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(item: Any, viewHolder: ViewHolder, payloads: MutableList<Any>) {
@@ -30,22 +28,20 @@ class TextItemDelegate (
     }
 
     inner class ViewHolder(
-        override val containerView: View,
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        private val viewBinding: ItemTextBinding,
+    ) : RecyclerView.ViewHolder(viewBinding.root) {
 
         private var currentItem: TextItem? = null
 
-        private val binding: ItemTextBinding by viewBinding()
 
-
-        fun bind(item: TextItem) = with(containerView) {
+        fun bind(item: TextItem) = with(viewBinding) {
             currentItem = item
-            binding.imageButton.setOnClickListener {
+            viewBinding.imageButton.setOnClickListener {
                 addLike(item)
             }
-            binding.title.text = item.title
-            binding.likes.text = item.likes.toString()
-            binding.author.text = item.author
+            viewBinding.title.text = item.title
+            viewBinding.likes.text = item.likes.toString()
+            viewBinding.author.text = item.author
         }
 
         fun addLike(item: TextItem){

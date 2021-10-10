@@ -19,9 +19,7 @@ class ImageItemDelegate(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_image, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(ItemImageBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(item: Any, viewHolder: ViewHolder, payloads: MutableList<Any>) {
@@ -29,17 +27,15 @@ class ImageItemDelegate(
     }
 
     inner class ViewHolder(
-        override val containerView: View,
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        private val viewBinding: ItemImageBinding
+    ) : RecyclerView.ViewHolder(viewBinding.root) {
 
         private var currentItem: ImageItem? = null
 
-        private val binding: ItemImageBinding by viewBinding()
-
-        fun bind(item: ImageItem) = with(containerView) {
+        fun bind(item: ImageItem) = with(viewBinding) {
             currentItem = item
-            binding.title.text = item.title
-            binding.author.text = item.author
+            viewBinding.title.text = item.title
+            viewBinding.author.text = item.author
         }
     }
 }

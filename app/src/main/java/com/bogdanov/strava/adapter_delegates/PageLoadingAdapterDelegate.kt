@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bogdanov.strava.R
+import com.bogdanov.strava.databinding.ItemLoadingPageBinding
 import com.bogdanov.strava.models.LoadingItem
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import kotlinx.android.extensions.LayoutContainer
@@ -12,9 +13,7 @@ import kotlinx.android.extensions.LayoutContainer
 class PageLoadingAdapterDelegate :
     AbsListItemAdapterDelegate<LoadingItem, Any, PageLoadingAdapterDelegate.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup): Holder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_loading_page, parent, false)
-        return Holder(itemView)
+        return Holder(ItemLoadingPageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun isForViewType(item: Any, items: MutableList<Any>, position: Int): Boolean {
@@ -29,6 +28,6 @@ class PageLoadingAdapterDelegate :
     }
 
     class Holder(
-        override val containerView: View
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer
+        private val viewBinding: ItemLoadingPageBinding
+    ) : RecyclerView.ViewHolder(viewBinding.root)
 }
