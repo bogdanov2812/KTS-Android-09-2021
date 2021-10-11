@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.databinding.FragmentMainBinding
-import com.bogdanov.strava.models.ImageItem
 import com.bogdanov.strava.models.LoadingItem
-import com.bogdanov.strava.models.TextItem
 import com.bogdanov.strava.utils.PaginationScrollListener
 import com.bogdanov.strava.utils.autoCleared
 import java.util.*

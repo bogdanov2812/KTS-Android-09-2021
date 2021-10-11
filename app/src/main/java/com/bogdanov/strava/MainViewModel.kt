@@ -1,7 +1,6 @@
 package com.bogdanov.strava
 
 import androidx.lifecycle.ViewModel
-import com.bogdanov.strava.models.ImageItem
 import com.bogdanov.strava.models.TextItem
 import java.util.*
 
@@ -15,12 +14,6 @@ class MainViewModel : ViewModel() {
                 likes = (0..100).random(),
                 uuid = randomUUID
             )
-            2 -> ImageItem(
-                title = "Самый обыкновенный заголовок",
-                author = "Какой-то автор",
-                uuid = randomUUID
-            )
-
             else -> error("Wrong random number")
         }
     }
