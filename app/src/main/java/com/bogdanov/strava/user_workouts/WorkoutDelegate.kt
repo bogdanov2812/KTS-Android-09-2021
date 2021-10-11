@@ -40,8 +40,8 @@ class WorkoutDelegate: AbsListItemAdapterDelegate<Workout, Workout, WorkoutDeleg
             date.text = reformatDate(item.start_date)
             timeTrain.text = reformatTime(item.start_date)
             distance.text = item.distance.toString()
-            temp.text = item.average_speed.toString()
-            time.text = item.moving_time.toString()
+            temp.text = "%.2f".format(item.average_speed)
+            time.text = timeToMinute(item.moving_time).toString()
         }
 
         private fun reformatDate(dateTime: String): String {
@@ -54,7 +54,12 @@ class WorkoutDelegate: AbsListItemAdapterDelegate<Workout, Workout, WorkoutDeleg
         private fun reformatTime(dateTime: String): String{
             val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
             val timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+
             return timeFormat.format(parser.parse(dateTime))
+        }
+
+        private fun timeToMinute(seconds: Int): Int {
+            return seconds / 60
         }
     }
 }

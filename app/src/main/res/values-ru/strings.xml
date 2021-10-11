@@ -20,8 +20,8 @@
     <string name="athlete_country">Страна:</string>
     <string name="athlete_weight">Вес:</string>
     <string name="weight">%1$s кг</string>
-    <string name="distance">Дистанция</string>
-    <string name="pace">Темп</string>
-    <string name="time">Время</string>
+    <string name="distance">Дистанция (м)</string>
+    <string name="pace">Скорость (м/с)</string>
+    <string name="time">Время (мин)</string>
     <string name="fail_load_data">Не удалось загрузить данные</string>
 </resources>

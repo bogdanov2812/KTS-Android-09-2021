@@ -19,8 +19,8 @@
     <string name="athlete_country">Country:</string>
     <string name="athlete_weight">Weight:</string>
     <string name="weight">%1$s kg</string>
-    <string name="distance">Distance</string>
-    <string name="pace">Pace</string>
-    <string name="time">Time</string>
+    <string name="distance">Distance (m)</string>
+    <string name="pace">Speed (m/s)</string>
+    <string name="time">Time (min)</string>
     <string name="fail_load_data">Failed to load data</string>
 </resources>

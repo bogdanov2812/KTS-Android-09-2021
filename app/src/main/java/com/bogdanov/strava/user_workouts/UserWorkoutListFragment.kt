@@ -2,9 +2,7 @@ package com.bogdanov.strava.user_workouts
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +17,7 @@ class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
 
     private val binding: FragmentUserWorkoutListBinding by viewBinding()
 
-    private var activityAdapter: WorkoutListAdapter by autoCleared()
+    private var workoutAdapter: WorkoutListAdapter by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,8 +27,7 @@ class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
         viewModel.getUserWorkouts()
 
         viewModel.userWorkouts.observe(viewLifecycleOwner, {
-            println(it)
-            activityAdapter.items = it
+            workoutAdapter.items = it
         })
 
         viewModel.failToast.observe(viewLifecycleOwner,{
@@ -39,18 +36,11 @@ class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
     }
 
     private fun initList(){
-        activityAdapter = WorkoutListAdapter()
+        workoutAdapter = WorkoutListAdapter()
         binding.WorkoutList.apply{
-            adapter = activityAdapter
+            adapter = workoutAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
-    }
-
-    private fun bindViewModel(){
-        viewModel.userWorkouts.observe(viewLifecycleOwner, {
-            println(it)
-            activityAdapter.items = it
-        })
     }
 }
