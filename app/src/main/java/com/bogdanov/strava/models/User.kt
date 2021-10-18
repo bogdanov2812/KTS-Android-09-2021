@@ -5,11 +5,11 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class User(
-    val firstname: String = "firstname",
-    val lastname: String = "lastname",
-    val city: String = "city",
-    val country: String = "countru",
-    val weight: Float = 0f,
+    val firstname: String,
+    val lastname: String,
+    val city: String?,
+    val country: String?,
+    val weight: Float?,
     @Json(name = "profile")
     val avatar: String? = null,
 )
