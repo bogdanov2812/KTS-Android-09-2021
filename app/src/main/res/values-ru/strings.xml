@@ -9,6 +9,19 @@
     <string name="passwordTextView_error">Пароль должен быть не короче 8 символов</string>
     <string name="welcome">Добро пожаловать на главную страницу!</string>
     <string name="skip_button">Пропустить</string>
-    <string name="button_next">Следующий</string>
+    <string name="button_next">Далее</string>
     <string name="button_finish">Закончить</string>
+    <string name="auth_canceled">Аутентификация не выполнена</string>
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="athlete_username">Имя пользователя:</string>
+    <string name="athlete_firstname">Имя:</string>
+    <string name="athlete_lastname">Фамилия:</string>
+    <string name="athlete_city">Город:</string>
+    <string name="athlete_country">Страна:</string>
+    <string name="athlete_weight">Вес:</string>
+    <string name="weight">%1$s кг</string>
+    <string name="distance">Дистанция (м)</string>
+    <string name="pace">Скорость (м/с)</string>
+    <string name="time">Время (мин)</string>
+    <string name="fail_load_data">Не удалось загрузить данные</string>
 </resources>

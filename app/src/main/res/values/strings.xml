@@ -10,4 +10,17 @@
     <string name="skip_button">Skip</string>
     <string name="button_next">Next</string>
     <string name="button_finish">Finish</string>
+    <string name="auth_canceled">Authentication failed</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="athlete_username">Username:</string>
+    <string name="athlete_firstname">Firstname:</string>
+    <string name="athlete_lastname">Lastname:</string>
+    <string name="athlete_city">City:</string>
+    <string name="athlete_country">Country:</string>
+    <string name="athlete_weight">Weight:</string>
+    <string name="weight">%1$s kg</string>
+    <string name="distance">Distance (m)</string>
+    <string name="pace">Speed (m/s)</string>
+    <string name="time">Time (min)</string>
+    <string name="fail_load_data">Failed to load data</string>
 </resources>

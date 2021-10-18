@@ -19,7 +19,7 @@ class OnBoardingThirdFragment : Fragment(R.layout.fragment_on_boarding_third){
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFinish.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_loginPage)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_authFragment)
         }
 
     }

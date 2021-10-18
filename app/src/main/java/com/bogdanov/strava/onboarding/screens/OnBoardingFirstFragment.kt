@@ -21,7 +21,7 @@ class OnBoardingFirstFragment : Fragment(R.layout.fragment_on_boarding_first){
         val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
 
         binding.buttonSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_loginPage)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_authFragment)
         }
 
         binding.buttonNext.setOnClickListener {
