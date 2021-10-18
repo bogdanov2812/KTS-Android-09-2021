@@ -1,9 +1,15 @@
 package com.bogdanov.strava.auth
 
+import android.content.Context
 import android.net.Uri
+import com.bogdanov.strava.datastore.DatastoreRepository
+import com.bogdanov.strava.datastore.SharedPrefs
 import net.openid.appauth.*
 
-class AuthRepository {
+class AuthRepository(context: Context) {
+
+    private val sharedPrefs = SharedPrefs(context)
+
     fun getAuthRequest(): AuthorizationRequest {
         val serviceConfiguration = AuthorizationServiceConfiguration(
             Uri.parse(AuthConfig.AUTH_URI),
@@ -32,7 +38,12 @@ class AuthRepository {
             when {
                 response != null -> {
                     val accessToken = response.accessToken.orEmpty()
-                    AuthConfig.token = accessToken
+
+                    val refreshToken = response.refreshToken.orEmpty()
+
+                    sharedPrefs.saveString(accessToken, "token")
+                    sharedPrefs.saveString(refreshToken, "refresh_token")
+
                     onComplete()
                 }
                 else -> onError()
@@ -40,7 +51,9 @@ class AuthRepository {
         }
     }
 
+
     private fun getClientAuthentication(): ClientAuthentication {
         return ClientSecretPost(AuthConfig.CLIENT_SECRET)
     }
+
 }

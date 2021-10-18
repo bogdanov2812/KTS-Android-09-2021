@@ -1,5 +1,6 @@
 package com.bogdanov.strava.auth
 
+import android.content.SharedPreferences
 import net.openid.appauth.ResponseTypeValues
 
 object AuthConfig {
@@ -11,5 +12,4 @@ object AuthConfig {
     const val CLIENT_ID = "72128"
     const val CLIENT_SECRET = "f8fe54eb5912269d74e97e201f00ccf51917f674"
     const val CALLBACK_URL = "strava://strava.auth/callback"
-    var token : String? = null
 }

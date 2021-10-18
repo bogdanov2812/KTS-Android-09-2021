@@ -1,5 +1,6 @@
 package com.bogdanov.strava.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
 import com.bogdanov.strava.databinding.FragmentAuthBinding
+import com.bogdanov.strava.datastore.SharedPrefs
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 import com.bogdanov.strava.utils.toast
@@ -19,7 +21,15 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        bindViewModel()
+
+        val sharedPrefs = SharedPrefs(requireContext())
+        if (sharedPrefs.token != null){
+            findNavController().navigate(R.id.action_authFragment_to_userChooseFragment)
+        }
+        else{
+            bindViewModel()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
