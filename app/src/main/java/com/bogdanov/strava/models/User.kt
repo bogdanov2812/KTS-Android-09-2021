@@ -21,11 +21,11 @@ data class User(
     @ColumnInfo(name = UserContracts.Columns.LAST_NAME)
     val lastname: String,
     @ColumnInfo(name = UserContracts.Columns.CITY)
-    val city: String,
+    val city: String?,
     @ColumnInfo(name = UserContracts.Columns.COUNTRY)
-    val country: String,
+    val country: String?,
     @ColumnInfo(name = UserContracts.Columns.WEIGHT)
-    val weight: Float,
+    val weight: Float?,
     @Json(name = "profile")
     @ColumnInfo(name = UserContracts.Columns.AVATAR)
     val avatar: String?,
