@@ -24,4 +24,6 @@
     <string name="pace">Скорость (м/с)</string>
     <string name="time">Время (мин)</string>
     <string name="fail_load_data">Не удалось загрузить данные</string>
+    <string name="Logout">Logout</string>
+    <string name="data_from_db">Отображаются данные из локального хранилища</string>
 </resources>

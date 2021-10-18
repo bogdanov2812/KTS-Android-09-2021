@@ -23,4 +23,6 @@
     <string name="pace">Speed (m/s)</string>
     <string name="time">Time (min)</string>
     <string name="fail_load_data">Failed to load data</string>
+    <string name="Logout">Logout</string>
+    <string name="data_from_db">Data from the local storage is displayed</string>
 </resources>
