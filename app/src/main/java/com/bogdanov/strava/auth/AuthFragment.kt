@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
@@ -14,22 +15,23 @@ import com.bogdanov.strava.datastore.SharedPrefs
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 import com.bogdanov.strava.utils.toast
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
     private val binding by viewBinding(FragmentAuthBinding::bind)
-    private val viewModel: AuthViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val sharedPrefs = SharedPrefs(requireContext())
-        if (sharedPrefs.token != null){
+        if (!SharedPrefs.authToken.isNullOrEmpty()){
             findNavController().navigate(R.id.action_authFragment_to_userChooseFragment)
-        }
-        else{
+        }else{
             bindViewModel()
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -1,6 +1,5 @@
 package com.bogdanov.strava.auth
 
-import android.content.SharedPreferences
 import net.openid.appauth.ResponseTypeValues
 
 object AuthConfig {

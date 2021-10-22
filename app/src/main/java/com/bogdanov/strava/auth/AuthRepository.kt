@@ -2,13 +2,10 @@ package com.bogdanov.strava.auth
 
 import android.content.Context
 import android.net.Uri
-import com.bogdanov.strava.datastore.DatastoreRepository
 import com.bogdanov.strava.datastore.SharedPrefs
 import net.openid.appauth.*
 
-class AuthRepository(context: Context) {
-
-    private val sharedPrefs = SharedPrefs(context)
+class AuthRepository() {
 
     fun getAuthRequest(): AuthorizationRequest {
         val serviceConfiguration = AuthorizationServiceConfiguration(
@@ -41,9 +38,13 @@ class AuthRepository(context: Context) {
 
                     val refreshToken = response.refreshToken.orEmpty()
 
-                    sharedPrefs.saveString(accessToken, "token")
-                    sharedPrefs.saveString(refreshToken, "refresh_token")
+                    SharedPrefs.authToken = accessToken
+                    SharedPrefs.refreshToken = refreshToken
 
+                    val userId = response.additionalParameters["athlete"]?.substringAfter(":")
+                        ?.substringBefore(",")?.toLong()
+
+                    SharedPrefs.currentUserId = userId
                     onComplete()
                 }
                 else -> onError()

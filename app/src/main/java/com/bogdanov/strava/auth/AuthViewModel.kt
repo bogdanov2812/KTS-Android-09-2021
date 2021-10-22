@@ -2,19 +2,18 @@ package com.bogdanov.strava.auth
 
 import android.app.Application
 import android.content.Intent
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.bogdanov.strava.R
-import com.bogdanov.strava.datastore.DatastoreRepository
 import com.bogdanov.strava.utils.SingleLiveEvent
+import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.TokenRequest
 
-class AuthViewModel(application: Application) : AndroidViewModel(application){
-    private val authRepository = AuthRepository(application)
-    private val authService: AuthorizationService = AuthorizationService(getApplication())
+class AuthViewModel(
+    private val authRepository: AuthRepository,
+    private val authorizationService: AuthorizationService,
+) : ViewModel(){
     private val openAuthPageLiveEvent = SingleLiveEvent<Intent>()
     private val authSuccessLiveEvent = SingleLiveEvent<Unit>()
     private val loadingMutableLiveData = MutableLiveData(false)
@@ -39,7 +38,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application){
     fun onAuthCodeReceived(tokenRequest: TokenRequest) {
 
         authRepository.performTokenRequest(
-            authService = authService,
+            authService = authorizationService,
             tokenRequest = tokenRequest,
             onComplete = {
                 loadingMutableLiveData.postValue(false)
@@ -53,7 +52,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun openLoginPage() {
-        val openAuthPageIntent = authService.getAuthorizationRequestIntent(
+        val openAuthPageIntent = authorizationService.getAuthorizationRequestIntent(
             authRepository.getAuthRequest()
         )
 
@@ -62,6 +61,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application){
 
     override fun onCleared() {
         super.onCleared()
-        authService.dispose()
+        authorizationService.dispose()
     }
 }
