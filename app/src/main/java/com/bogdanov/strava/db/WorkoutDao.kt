@@ -11,7 +11,7 @@ import com.bogdanov.strava.models.WorkoutContracts
 
 @Dao
 interface WorkoutDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWorkouts(workouts: List<Workout>)
 
     @Query("SELECT * FROM ${WorkoutContracts.TABLE_NAME} WHERE ${WorkoutContracts.Columns.USER_ID} = :userId")

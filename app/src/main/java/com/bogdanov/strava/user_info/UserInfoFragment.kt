@@ -11,19 +11,17 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
 import com.bogdanov.strava.databinding.FragmentUserInfoBinding
+import com.bogdanov.strava.datastore.SharedPrefs
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserInfoFragment: Fragment(R.layout.fragment_user_info) {
 
     private val binding: FragmentUserInfoBinding by viewBinding()
 
-    private val viewModel by viewModels<UserInfoViewModel>()
-
-    private val sharedPrefs by lazy{
-        requireContext().getSharedPreferences("Auth", Context.MODE_PRIVATE)
-    }
+    private val viewModel: UserInfoViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,14 +47,15 @@ class UserInfoFragment: Fragment(R.layout.fragment_user_info) {
         })
 
         binding.buttonLogout.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO){
-                sharedPrefs.edit()
-                    .clear()
-                    .apply()
+            with(SharedPrefs){
+                authToken = null
+                refreshToken = null
+                currentUserId = null
+                findNavController().navigate(R.id.action_userInfoFragment_to_authFragment)
             }
 
-            findNavController().navigate(R.id.action_userInfoFragment_to_authFragment)
         }
+
     }
 
 }

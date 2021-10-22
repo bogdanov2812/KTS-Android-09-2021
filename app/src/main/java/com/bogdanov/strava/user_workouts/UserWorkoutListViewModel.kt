@@ -3,8 +3,6 @@ package com.bogdanov.strava.user_workouts
 import android.app.Application
 import androidx.lifecycle.*
 import com.bogdanov.strava.R
-import com.bogdanov.strava.datastore.DatastoreKeys
-import com.bogdanov.strava.datastore.DatastoreRepository
 import com.bogdanov.strava.datastore.SharedPrefs
 import com.bogdanov.strava.db.WorkoutRepository
 import com.bogdanov.strava.models.Workout
@@ -17,13 +15,10 @@ import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class UserWorkoutListViewModel(application: Application): AndroidViewModel(application) {
-
-    private val sharedPrefs = SharedPrefs(application)
-
-    private val repository = NetworkRepository()
-
-    private val workoutRepository = WorkoutRepository()
+class UserWorkoutListViewModel(
+    private val repository: NetworkRepository,
+    private val workoutRepository: WorkoutRepository
+): ViewModel() {
 
     private val userWorkoutsLiveData = MutableLiveData<List<Workout>>(emptyList())
 
@@ -43,13 +38,22 @@ class UserWorkoutListViewModel(application: Application): AndroidViewModel(appli
             runCatching {
                 repository.userWorkouts()
             }.onSuccess {
-                workoutRepository.saveWorkouts(it)
                 userWorkoutsLiveData.postValue(it)
+                if (it != SharedPrefs.currentUserId?.let { it1 ->
+                        workoutRepository.getUserWorkouts(
+                            it1
+                        )
+                    }){
+                    workoutRepository.saveWorkouts(it)
+                }
             }.onFailure {
                 try {
-                    val id = sharedPrefs.currentId
-                    val workouts = workoutRepository.getUserWorkouts(id)
-                    userWorkoutsLiveData.postValue(workouts)
+                    val workouts = SharedPrefs.currentUserId?.let { it1 ->
+                        workoutRepository.getUserWorkouts(
+                            it1
+                        )
+                    }
+                    userWorkoutsLiveData.postValue(workouts!!)
                     _failToast.postValue(R.string.data_from_db)
                 }catch (t: Throwable){
                     _failToast.postValue(R.string.fail_load_data)

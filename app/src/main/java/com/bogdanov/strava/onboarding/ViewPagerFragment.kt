@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
 import com.bogdanov.strava.databinding.FragmentViewPagerBinding
+import com.bogdanov.strava.datastore.SharedPrefs
 import com.bogdanov.strava.onboarding.screens.OnBoardingFirstFragment
 import com.bogdanov.strava.onboarding.screens.OnBoardingSecondFragment
 import com.bogdanov.strava.onboarding.screens.OnBoardingThirdFragment
@@ -18,9 +19,7 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = requireContext().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-
-        if(sharedPreferences.getBoolean("Finished", false)) {
+        if(SharedPrefs.onBoardingCheck) {
             findNavController().navigate(R.id.action_viewPagerFragment_to_authFragment)
         }
 

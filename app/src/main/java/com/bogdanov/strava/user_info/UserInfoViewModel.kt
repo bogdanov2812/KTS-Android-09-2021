@@ -5,9 +5,6 @@ import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.*
 import com.bogdanov.strava.R
-import com.bogdanov.strava.StravaApplication
-import com.bogdanov.strava.datastore.DatastoreKeys
-import com.bogdanov.strava.datastore.DatastoreRepository
 import com.bogdanov.strava.datastore.SharedPrefs
 import com.bogdanov.strava.db.UserRepository
 import com.bogdanov.strava.models.User
@@ -20,13 +17,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class UserInfoViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val sharedPrefs = SharedPrefs(application)
-
-    private val repository = NetworkRepository()
-
-    private val userRepository = UserRepository()
+class UserInfoViewModel(
+    private val repository: NetworkRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     private val userInfoLiveData = MutableLiveData<User?>(null)
 
@@ -47,12 +41,17 @@ class UserInfoViewModel(application: Application) : AndroidViewModel(application
                 repository.userInfo()
             }.onSuccess {
                 userInfoLiveData.postValue(it)
-                userRepository.saveUser(it)
-                sharedPrefs.saveLong(it.id, "current_id")
+                if (it != userRepository.getUserById(it.id)){
+                    Timber.d("SUCCESS", "New user info:$it")
+                    userRepository.saveUser(it)
+                }
             }.onFailure {
                 try {
-                    val id = sharedPrefs.currentId
-                    val user = userRepository.getUserById(id)
+                    val user = SharedPrefs.currentUserId?.let { it1 ->
+                        userRepository.getUserById(
+                            it1
+                        )
+                    }
                     userInfoLiveData.postValue(user)
                     _failToast.postValue(R.string.data_from_db)
                 }catch (t: Throwable){

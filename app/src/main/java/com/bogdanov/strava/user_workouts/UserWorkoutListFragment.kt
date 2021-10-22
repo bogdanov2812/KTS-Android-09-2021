@@ -10,10 +10,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
 import com.bogdanov.strava.databinding.FragmentUserWorkoutListBinding
 import com.bogdanov.strava.utils.autoCleared
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
-    private val viewModel: UserWorkoutListViewModel by viewModels()
+    private val viewModel: UserWorkoutListViewModel by viewModel()
 
     private val binding: FragmentUserWorkoutListBinding by viewBinding()
 

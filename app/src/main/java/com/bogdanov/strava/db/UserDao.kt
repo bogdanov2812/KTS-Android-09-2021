@@ -10,7 +10,7 @@ import com.bogdanov.strava.models.UserContracts
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsers(users: List<User>)
 
     @Query("SELECT * FROM ${UserContracts.TABLE_NAME} WHERE ${UserContracts.Columns.ID} = :userId")
