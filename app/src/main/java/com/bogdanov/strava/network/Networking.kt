@@ -1,6 +1,6 @@
 package com.bogdanov.strava.network
 
-import android.content.Context
+import com.bogdanov.strava.data.remote.StravaApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

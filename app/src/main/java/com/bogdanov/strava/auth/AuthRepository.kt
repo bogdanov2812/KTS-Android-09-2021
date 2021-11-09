@@ -1,11 +1,48 @@
 package com.bogdanov.strava.auth
 
-import android.content.Context
 import android.net.Uri
+import com.bogdanov.strava.data.local.entity.UserEntity
+import com.bogdanov.strava.data.remote.dto.UserDto
 import com.bogdanov.strava.datastore.SharedPrefs
+import com.google.gson.Gson
 import net.openid.appauth.*
+import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
+import timber.log.Timber
+import java.io.IOException
 
 class AuthRepository() {
+
+    fun deauthorize(){
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor {
+                Timber.tag("Network").d(it)
+            }
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+            .build()
+
+        Timber.d(SharedPrefs.authToken)
+
+        val requestBody = FormBody.Builder()
+            .add("access_token", SharedPrefs.authToken ?: "")
+            .build()
+        val request = Request.Builder()
+            .url("https://www.strava.com/oauth/deauthorize")
+            .post(requestBody)
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Timber.e(e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Timber.d("${response.code}")
+            }
+        })
+    }
+
 
     fun getAuthRequest(): AuthorizationRequest {
         val serviceConfiguration = AuthorizationServiceConfiguration(
@@ -28,7 +65,7 @@ class AuthRepository() {
     fun performTokenRequest(
         authService: AuthorizationService,
         tokenRequest: TokenRequest,
-        onComplete: () -> Unit,
+        onComplete: (user: UserEntity) -> Unit,
         onError: () -> Unit
     ) {
         authService.performTokenRequest(tokenRequest, getClientAuthentication()) { response, ex ->
@@ -41,11 +78,14 @@ class AuthRepository() {
                     SharedPrefs.authToken = accessToken
                     SharedPrefs.refreshToken = refreshToken
 
-                    val userId = response.additionalParameters["athlete"]?.substringAfter(":")
-                        ?.substringBefore(",")?.toLong()
+                    val user = Gson().fromJson(response.additionalParameters["athlete"], UserDto::class.java)
+
+                    Timber.d("$user")
+
+                    val userId = user.id
 
                     SharedPrefs.currentUserId = userId
-                    onComplete()
+                    onComplete(user.toEntity())
                 }
                 else -> onError()
             }

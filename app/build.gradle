@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.plugin.parcelize'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -85,4 +86,7 @@ dependencies {
 
     def koin_version = "3.1.2"
     implementation "io.insert-koin:koin-android:$koin_version"
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.7'
 }

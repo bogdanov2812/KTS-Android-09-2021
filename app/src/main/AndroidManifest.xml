@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bogdanov.strava">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,23 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Strava">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+            <nav-graph android:value="@navigation/nav_graph"/>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW"/>-->
 
-                <data
-                    android:scheme="https"
-                    android:host="www.strava.com"/>
-            </intent-filter>
+<!--                <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
+
+<!--                <data-->
+<!--                    android:scheme="https"-->
+<!--                    android:host="www.strava.com"-->
+<!--                    android:pathPrefix="/athletes"/>-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
