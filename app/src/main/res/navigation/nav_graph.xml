@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="com.bogdanov.strava.WebViewFragment"
+        android:name="com.bogdanov.strava.presentation.web_view.WebViewFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_web_view">
         <argument

@@ -14,7 +14,7 @@ import timber.log.Timber
 class UserRepositoryImpl(
     private val api: StravaApi,
     private val dao: UserDao
-): UserRepository {
+) : UserRepository {
 
 
     override suspend fun getUserInfo1(): Resource<User> {
@@ -43,21 +43,18 @@ class UserRepositoryImpl(
     }
 
 
-
-
     override suspend fun updateUserInfo(weight: Float) {
         try {
             val response = api.updateUserInfo(weight)
 
             val result = response.body()
 
-            if (response.isSuccessful && result != null)
-            {
+            if (response.isSuccessful && result != null) {
                 dao.insertUsers(listOf(result.toEntity()))
             }
 
 
-        }catch (t: Throwable){
+        } catch (t: Throwable) {
             Timber.e(t)
         }
     }
@@ -71,19 +68,20 @@ class UserRepositoryImpl(
 
             val userDto = response.body()
 
-            if (response.isSuccessful && userDto != null){
+            if (response.isSuccessful && userDto != null) {
                 dao.insertUsers(listOf(userDto.toEntity()))
                 emit(Resource.SuccessFromApi(userDto.toDomainModel()))
             }
-        }catch (t: Throwable){
+        } catch (t: Throwable) {
             emit(Resource.Error(message = "Error from API"))
             try {
                 emit(Resource.Loading())
+                Timber.d("FROM DB")
                 val userEntity = dao.getUserById(SharedPrefs.currentUserId ?: 0L)
                 if (userEntity != null) {
                     emit(Resource.SuccessFromDb(userEntity.toDomainModel()))
                 }
-            }catch (t: Throwable){
+            } catch (t: Throwable) {
                 emit(Resource.Error(message = "Error in DB"))
             }
 
@@ -93,7 +91,7 @@ class UserRepositoryImpl(
     override suspend fun saveUser(user: UserEntity) {
         try {
             dao.insertUsers(listOf(user))
-        }catch(t: Throwable){
+        } catch (t: Throwable) {
             Timber.e(t)
         }
     }
@@ -101,7 +99,7 @@ class UserRepositoryImpl(
     override suspend fun deleteAllUsers() {
         try {
             dao.removeAll()
-        }catch (t: Throwable){
+        } catch (t: Throwable) {
             Timber.e(t)
         }
     }

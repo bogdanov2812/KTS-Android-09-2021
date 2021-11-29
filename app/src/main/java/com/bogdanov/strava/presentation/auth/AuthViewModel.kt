@@ -3,7 +3,7 @@ package com.bogdanov.strava.presentation.auth
 import android.content.Intent
 import androidx.lifecycle.*
 import com.bogdanov.strava.R
-import com.bogdanov.strava.auth.AuthRepository
+import com.bogdanov.strava.data.remote.auth.AuthRepository
 import com.bogdanov.strava.data.local.entity.UserEntity
 import com.bogdanov.strava.domain.repository.UserRepository
 import com.bogdanov.strava.utils.SingleLiveEvent
@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.TokenRequest
-import timber.log.Timber
 
 class AuthViewModel(
     private val authRepository: AuthRepository,

@@ -44,6 +44,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
                     bottomNavigationView.visibility = View.GONE
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
+                R.id.webViewFragment ->{
+                    bottomNavigationView.visibility = View.GONE
+                }
 
                 else -> bottomNavigationView.visibility = View.VISIBLE
             }

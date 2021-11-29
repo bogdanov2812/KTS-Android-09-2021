@@ -30,9 +30,9 @@
     <string name="weight_error">Enter correct value</string>
     <string name="dialog_title">Edit profile</string>
     <string name="data_from_api">Data from the server is displayed</string>
-
+    <string name="web_view">Profile</string>
     //
-    <string name="user_add_title">Add new user</string>
+    <string name="user_add_title">Add new workout</string>
     <string name="user_add_hint_first_name">First name</string>
     <string name="user_add_hint_last_name">Last name</string>
     <string name="user_add_hint_email">Email</string>
@@ -40,6 +40,9 @@
     <string name="user_add_button_save">Save</string>
     <string name="user_add_error_incorrect_format">Incorrect form</string>
     <string name="user_add_error_default">User save error</string>
+    <string name="welcome_screen">Welcome to client for Strava!</string>
+    <string name="second_screen">After authorization, most of the app\'s functions will be available to you</string>
+    <string name="third_screen">You will be able to view and edit your profile, as well as monitor your workouts and add them</string>
     //
 
     <string-array name="workout_type">

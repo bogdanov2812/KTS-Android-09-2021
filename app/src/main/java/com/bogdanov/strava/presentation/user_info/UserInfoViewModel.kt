@@ -2,7 +2,7 @@ package com.bogdanov.strava.presentation.user_info
 
 import androidx.lifecycle.*
 import com.bogdanov.strava.R
-import com.bogdanov.strava.auth.AuthRepository
+import com.bogdanov.strava.data.remote.auth.AuthRepository
 import com.bogdanov.strava.utils.Resource
 import com.bogdanov.strava.domain.use_case.GetUserInfoUseCase
 import com.bogdanov.strava.datastore.SharedPrefs
@@ -11,7 +11,6 @@ import com.bogdanov.strava.domain.repository.UserRepository
 import com.bogdanov.strava.domain.use_case.UpdateUserInfoUserCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class UserInfoViewModel(
     private val getUserUseCase: GetUserInfoUseCase,

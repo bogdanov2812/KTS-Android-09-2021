@@ -7,9 +7,11 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bogdanov.strava.R
 import com.bogdanov.strava.databinding.FragmentUserWorkoutListBinding
+import com.bogdanov.strava.utils.PaginationScrollListener
 import com.bogdanov.strava.utils.autoCleared
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,6 +47,7 @@ class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
             adapter = workoutAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
+
         }
     }
 
@@ -58,7 +61,7 @@ class UserWorkoutListFragment: Fragment(R.layout.fragment_user_workout_list) {
 
     private fun initToastObserver(){
         viewModel.actionToast.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
     }
 }
