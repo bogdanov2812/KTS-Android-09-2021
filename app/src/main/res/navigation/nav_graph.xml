@@ -7,39 +7,64 @@
 
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.bogdanov.strava.onboarding.ViewPagerFragment"
-        android:label="fragment_view_pager"
+        android:name="com.bogdanov.strava.presentation.on_boarding.ViewPagerFragment"
+        android:label="Welcome"
         tools:layout="@layout/fragment_view_pager" >
         <action
             android:id="@+id/action_viewPagerFragment_to_authFragment"
-            app:destination="@id/authFragment" />
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.bogdanov.strava.auth.AuthFragment"
-        android:label="fragment_auth"
+        android:name="com.bogdanov.strava.presentation.auth.AuthFragment"
+        android:label="Authorize"
         tools:layout="@layout/fragment_auth" >
         <action
-            android:id="@+id/action_authFragment_to_userChooseFragment"
-            app:destination="@id/userChooseFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userChooseFragment"
-        android:name="com.bogdanov.strava.user_choose.UserChooseFragment"
-        android:label="UserChooseFragment" >
-        <action
-            android:id="@+id/action_userChooseFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
-        <action
-            android:id="@+id/action_userChooseFragment_to_userWorkoutListFragment"
-            app:destination="@id/userWorkoutListFragment" />
+            android:id="@+id/action_authFragment_to_userWorkoutListFragment"
+            app:destination="@id/userWorkoutListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.bogdanov.strava.user_info.UserInfoFragment"
-        android:label="UserInfoFragment" />
+        android:name="com.bogdanov.strava.presentation.user_info.UserInfoFragment"
+        android:label="Profile" >
+        <action
+            android:id="@+id/action_userInfoFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/userWorkoutListFragment"
-        android:name="com.bogdanov.strava.user_workouts.UserWorkoutListFragment"
-        android:label="UserWorkoutListFragment" />
+        android:name="com.bogdanov.strava.presentation.user_workouts.UserWorkoutListFragment"
+        android:label="Workouts" >
+        <action
+            android:id="@+id/action_userWorkoutListFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"
+            app:popUpTo="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_userWorkoutListFragment_to_workoutAddFragment"
+            app:destination="@id/workoutAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.bogdanov.strava.presentation.web_view.WebViewFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_web_view">
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://www.strava.com/athletes/{userId}" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutAddFragment"
+        android:name="com.bogdanov.strava.presentation.user_workouts.add_workout.WorkoutAddFragment"
+        android:label="WorkoutAddFragment" />
 </navigation>

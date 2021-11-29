@@ -24,4 +24,9 @@
     <string name="pace">Скорость (м/с)</string>
     <string name="time">Время (мин)</string>
     <string name="fail_load_data">Не удалось загрузить данные</string>
+    <string name="Logout">Logout</string>
+    <string name="data_from_db">Отображаются данные из локального хранилища</string>
+    <string name="welcome_screen">Welcome to client for Strava!</string>
+    <string name="second_screen">After authorization, most of the app\'s functions will be available to you</string>
+    <string name="third_screen">You will be able to view and edit your profile, as well as manage your activities</string>
 </resources>
